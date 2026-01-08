@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JURISTICO | Legal Knowledge</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ===== General ===== */
+body{margin:0;font-family:'Roboto',Arial,sans-serif;background:#f4f6f9;color:#333;scroll-behavior:smooth;overflow-x:hidden}
+header{background:linear-gradient(90deg,#0b2c4d,#09406b);color:#fff;padding:20px 10%;position:fixed;top:0;width:100%;z-index:1000;box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+header h1{margin:0;font-size:32px;display:inline;font-weight:700;letter-spacing:1px}
+nav{display:inline;margin-left:30px}
+nav a{color:#fff;margin-right:15px;text-decoration:none;font-size:15px;font-weight:bold;transition:0.3s}
+nav a:hover{color:#f1c40f}
+.lang-btn{float:right;background:#fff;color:#0b2c4d;border:none;padding:5px 12px;cursor:pointer;font-size:14px;border-radius:6px;transition:0.3s}
+.lang-btn:hover{opacity:0.9}
+section{padding:120px 10% 60px 10%;opacity:0;transform:translateY(60px);transition:all 1s ease-in-out}
+section.visible{opacity:1;transform:translateY(0)}
+h2,h3{color:#0b2c4d;text-align:center;margin-bottom:30px}
+
+/* ===== Hero ===== */
+.hero{
+  text-align:center;
+  background: linear-gradient(rgba(11,44,77,0.7), rgba(11,44,77,0.7)),
+              url('https://img.freepik.com/free-vector/abstract-legal-law-background_23-2148808581.jpg?w=1380') center/cover no-repeat;
+  border-radius:12px;
+  padding:120px 20px;
+  position:relative;
+  color:#fff;
+  overflow:hidden;
+}
+
+/* Legal watermark (gavel + balance scale) */
+.hero::before{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:300px;
+  height:300px;
+  background: url('https://img.icons8.com/ios-filled/200/ffffff/gavel.png') center/contain no-repeat;
+  opacity:0.1;
+  pointer-events:none;
+  z-index:0;
+}
+.hero h2, .hero p{position:relative; z-index:1;}
+
+/* Floating animation for hero text */
+.hero h2{animation: floatText 6s ease-in-out infinite}
+.hero p{animation: floatText 8s ease-in-out infinite}
+@keyframes floatText{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ===== Cards ===== */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
+.card{padding:30px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,0.15);transition:0.5s;position:relative;cursor:pointer;overflow:hidden;background:linear-gradient(135deg,#fff,#e0e7ef);animation: floatCard 8s ease-in-out infinite alternate}
+.card:hover{transform:translateY(-12px) scale(1.03);box-shadow:0 15px 35px rgba(0,0,0,0.25)}
+.card img{width:60px;height:60px;position:absolute;top:20px;right:20px;opacity:0.9;animation: floatIcon 6s ease-in-out infinite alternate}
+@keyframes floatCard{0%{transform:translateY(0)}50%{transform:translateY(-5px)}100%{transform:translateY(0)}}
+@keyframes floatIcon{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+.card h4{margin-top:10px;font-weight:700;color:#0b2c4d;text-shadow:1px 1px 3px rgba(255,255,255,0.5)}
+.card a{display:inline-block;margin-top:20px;color:#0b2c4d;text-decoration:none;font-weight:bold;transition:0.3s}
+.card a:hover{text-decoration:underline;color:#f1c40f}
+.law-detail{margin-top:20px;background:rgba(255,255,255,0.95);padding:20px;border-radius:12px;display:none;transition:0.6s;box-shadow:0 5px 15px rgba(0,0,0,0.1)}
+.law-detail.active{display:block}
+
+/* ===== Footer / Contact ===== */
+footer{background:linear-gradient(90deg,#0b2c4d,#09406b);color:#fff;text-align:center;padding:30px;font-size:15px;margin-top:50px;box-shadow:0 -4px 12px rgba(0,0,0,0.2)}
+.contact-form input,.contact-form textarea{width:100%;padding:14px;margin-bottom:14px;border-radius:8px;border:1px solid #ccc;transition:0.3s}
+.contact-form input:focus,.contact-form textarea:focus{border-color:#0b2c4d;outline:none;box-shadow:0 0 10px rgba(11,44,77,0.3)}
+.contact-form button{padding:14px 28px;background:#0b2c4d;color:#fff;border:none;cursor:pointer;border-radius:8px;font-weight:700;transition:0.3s}
+.contact-form button:hover{background:#09406b}
+.social-links img{width:40px;height:40px;transition:0.3s}
+.social-links img:hover{transform:scale(1.2)}
+@media(max-width:600px){header,section{padding:80px 6%}.lang-btn{float:none;display:block;margin-top:10px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>JURISTICO</h1>
+  <button class="lang-btn" onclick="toggleLang()">বাংলা | English</button>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#laws">Laws</a>
+    <a href="#problems">Common Problems</a>
+    <a href="#help">Help</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section id="home" class="hero">
+  <h2 id="headline">আপনার অধিকার জানুন | Know Your Rights</h2>
+  <p id="intro">JURISTICO একটি নির্ভরযোগ্য আইনভিত্তিক প্ল্যাটফর্ম যেখানে সাধারণ মানুষ সহজ ভাষায় আইন জানতে ও প্রয়োজনীয় দিকনির্দেশনা পেতে পারে।</p>
+</section>
+
+<section id="laws">
+<h3>Laws | আইন</h3>
+<div class="cards">
+<!-- Family Law Card -->
+<div class="card" onclick="toggleDetail('family')">
+<img src="https://img.icons8.com/ios-filled/70/000000/gavel.png"/>
+<h4>পারিবারিক আইন | Family Law</h4>
+<a href="#" onclick="toggleDetail('family');event.stopPropagation();">View Details</a>
+<div id="family" class="law-detail"><p>বিয়ে, তালাক, সন্তানের অধিকার, দেনমোহর, সম্পত্তি বিষয়ক বিস্তারিত।</p></div>
+</div>
+
+<!-- Criminal Law Card -->
+<div class="card" onclick="toggleDetail('criminal')">
+<img src="https://img.icons8.com/ios-filled/70/000000/criminal.png"/>
+<h4>ফৌজদারি আইন | Criminal Law</h4>
+<a href="#" onclick="toggleDetail('criminal');event.stopPropagation();">View Details</a>
+<div id="criminal" class="law-detail"><p>জিডি, FIR, মামলা, গ্রেপ্তার, জামিন, ফৌজদারি প্রক্রিয়া।</p></div>
+</div>
+
+<!-- Cyber Law Card -->
+<div class="card" onclick="toggleDetail('cyber')">
+<img src="https://img.icons8.com/ios-filled/70/000000/cyber-security.png"/>
+<h4>সাইবার আইন | Cyber Law</h4>
+<a href="#" onclick="toggleDetail('cyber');event.stopPropagation();">View Details</a>
+<div id="cyber" class="law-detail"><p>অনলাইন প্রতারণা, ডিজিটাল নিরাপত্তা, সাইবার অপরাধ রিপোর্টিং।</p></div>
+</div>
+
+<!-- Land Law Card -->
+<div class="card" onclick="toggleDetail('land')">
+<img src="https://img.icons8.com/ios-filled/70/000000/land.png"/>
+<h4>ভূমি আইন | Land Law</h4>
+<a href="#" onclick="toggleDetail('land');event.stopPropagation();">View Details</a>
+<div id="land" class="law-detail"><p>দলিল, নামজারি, জমি বিরোধ, খতিয়ান সম্পর্কিত তথ্য।</p></div>
+</div>
+
+<!-- Labour Law Card -->
+<div class="card" onclick="toggleDetail('labour')">
+<img src="https://img.icons8.com/ios-filled/70/000000/worker-male.png"/>
+<h4>চাকরি ও শ্রম আইন | Labour Law</h4>
+<a href="#" onclick="toggleDetail('labour');event.stopPropagation();">View Details</a>
+<div id="labour" class="law-detail"><p>চাকরি, বেতন, ছুটি, শ্রম আইন, কর্মসংস্থান সম্পর্কিত তথ্য।</p></div>
+</div>
+</div>
+</section>
+
+<section id="problems">
+<h3>Common Legal Problems | সাধারণ সমস্যা</h3>
+<div class="cards">
+<div class="card" onclick="toggleDetail('gd')">
+<img src="https://img.icons8.com/ios-filled/70/000000/document.png"/>
+<h4>জিডি কিভাবে করবেন</h4>
+<a href="#" onclick="toggleDetail('gd');event.stopPropagation()">View Details</a>
+<div id="gd" class="law-detail"><p>জিডি করার step by step নির্দেশনা।</p></div>
+</div>
+
+<div class="card" onclick="toggleDetail('case')">
+<img src="https://img.icons8.com/ios-filled/70/000000/court.png"/>
+<h4>মামলা করার ধাপ</h4>
+<a href="#" onclick="toggleDetail('case');event.stopPropagation()">View Details</a>
+<div id="case" class="law-detail"><p>মামলা দায়ের ও প্রক্রিয়া সংক্রান্ত তথ্য।</p></div>
+</div>
+
+<div class="card" onclick="toggleDetail('lawyer')">
+<img src="https://img.icons8.com/ios-filled/70/000000/lawyer.png"/>
+<h4>আইনজীবী নেওয়ার সময়</h4>
+<a href="#" onclick="toggleDetail('lawyer');event.stopPropagation()">View Details</a>
+<div id="lawyer" class="law-detail"><p>আইনজীবী নির্বাচন ও গুরুত্বপূর্ণ পরামর্শ।</p></div>
+</div>
+</div>
+</section>
+
+<section id="help">
+<h3>Help & Guidance | সহায়তা</h3>
+<div class="cards">
+<div class="card"><h4>করণীয় ও বর্জনীয়</h4></div>
+<div class="card"><h4>প্রয়োজনীয় ডকুমেন্ট লিস্ট</h4></div>
+<div class="card"><h4>জরুরি পরামর্শ (ডিসক্লেইমার)</h4></div>
+</div>
+</section>
+
+<section id="contact">
+<h3>Contact Us | যোগাযোগ</h3>
+<form class="contact-form">
+<input type="text" placeholder="Your Name">
+<input type="email" placeholder="Your Email">
+<input type="tel" placeholder="Phone">
+<textarea rows="4" placeholder="Your Question"></textarea>
+<button type="submit">Send</button>
+</form>
+<p>Email: <a href="mailto:juristicomail@gmail.com">juristicomail@gmail.com</a></p>
+<p>Phone: +88015-19-800400</p>
+<div class="social-links" style="margin-top:15px; display:flex; flex-wrap:wrap; gap:15px; justify-content:center;">
+<a href="https://www.linkedin.com/in/juristico_org" target="_blank"><img src="https://img.icons8.com/ios-filled/40/0b2c4d/linkedin.png"/></a>
+<a href="https://www.threads.net/juristico_org" target="_blank"><img src="https://img.icons8.com/ios-filled/40/0b2c4d/threads.png"/></a>
+<a href="https://www.youtube.com/@Juristico" target="_blank"><img src="https://img.icons8.com/ios-filled/40/0b2c4d/youtube-play.png"/></a>
+<a href="https://www.instagram.com/juristico_org" target="_blank"><img src="https://img.icons8.com/ios-filled/40/0b2c4d/instagram-new.png"/></a>
+<a href="https://www.facebook.com/share/17h12Z9UjP/" target="_blank"><img src="https://img.icons8.com/ios-filled/40/0b2c4d/facebook-new.png"/></a>
+</div>
+</section>
+
+<footer>
+<p>© 2026 JURISTICO | Legal Knowledge Platform</p>
+</footer>
+
+<script>
+function toggleDetail(id){document.getElementById(id).classList.toggle('active');}
+let isBangla=true;
+function toggleLang(){
+if(isBangla){
+document.getElementById('headline').innerText='Know Your Rights';
+document.getElementById('intro').innerText='JURISTICO is a legal platform helping people understand law easily.';
+}else{
+document.getElementById('headline').innerText='আপনার অধিকার জানুন | Know Your Rights';
+document.getElementById('intro').innerText='JURISTICO একটি নির্ভরযোগ্য আইনভিত্তিক প্ল্যাটফর্ম যেখানে সাধারণ মানুষ সহজ ভাষায় আইন জানতে ও প্রয়োজনীয় দিকনির্দেশনা পেতে পারে।';
+}
+isBangla=!isBangla;
+}
+const sections=document.querySelectorAll('section');
+window.addEventListener('scroll',()=>{
+const triggerBottom=window.innerHeight/5*4;
+sections.forEach(section=>{
+const sectionTop=section.getBoundingClientRect().top;
+if(sectionTop<triggerBottom){section.classList.add('visible');}
+});
+});
+</script>
+</body>
+</html>
